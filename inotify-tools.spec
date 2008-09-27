@@ -6,7 +6,7 @@ Summary:	inotify-tools provides a simple interface to inotify
 Summary(pl.UTF-8):	inotify-tools dostarcza interfejs do inotify
 Name:		inotify-tools
 Version:	3.13
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/inotify-tools/%{name}-%{version}.tar.gz
@@ -83,6 +83,9 @@ mv -f $RPM_BUILD_ROOT%{_datadir}/doc/%{name} $RPM_BUILD_ROOT%{_datadir}/doc/%{na
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
@@ -95,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/inotifytools/*.h
+%{_includedir}/inotifytools
 
 %files static
 %defattr(644,root,root,755)
