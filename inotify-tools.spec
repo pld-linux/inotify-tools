@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_with	doxygen		# build with doxygen support
+%bcond_without	static_libs	# don't build static library
 #
 Summary:	inotify-tools provides a simple interface to inotify
 Summary(pl.UTF-8):	inotify-tools dostarcza interfejs do inotify
@@ -12,6 +13,10 @@ Group:		Applications/System
 Source0:	http://dl.sourceforge.net/inotify-tools/%{name}-%{version}.tar.gz
 # Source0-md5:	35d7178297390f18bae451e083362acf
 URL:		http://inotify-tools.sourceforge.net/
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake
+BuildRequires:	libtool
+Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,7 +49,6 @@ Biblioteki do inotify-tools.
 Summary:	Header files for inotify-tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki inotify-tools
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
@@ -69,7 +73,13 @@ Statyczna biblioteka inotify-tools.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
+	--%{?with_static_libs:en}%{!?with_static_libs:dis}able-static \
 	%{?with_doxygen:--enable-doxygen}
 %{__make}
 
@@ -78,29 +88,35 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
 mv -f $RPM_BUILD_ROOT%{_datadir}/doc/%{name} $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/*
-%{_mandir}/man*/*.gz
+%{_mandir}/man1/inotifywait.1*
+%{_mandir}/man1/inotifywatch.1*
 
 %files libs
 %defattr(644,root,root,755)
-%{_libdir}/*.so*
+%attr(755,root,root) %{_libdir}/libinotifytools.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libinotifytools.so.0
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libinotifytools.so
+%{_libdir}/libinotifytools.la
 %{_includedir}/inotifytools
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/*.a
-%{_libdir}/*.la
+%{_libdir}/libinotifytools.a
+%endif
