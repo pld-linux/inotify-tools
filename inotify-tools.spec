@@ -6,13 +6,13 @@
 Summary:	inotify-tools provides a simple interface to inotify
 Summary(pl.UTF-8):	inotify-tools dostarcza interfejs do inotify
 Name:		inotify-tools
-Version:	3.14
-Release:	2
+Version:	3.20.1
+Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	http://github.com/downloads/rvoicilas/inotify-tools/%{name}-%{version}.tar.gz
-# Source0-md5:	b43d95a0fa8c45f8bab3aec9672cf30c
-URL:		http://inotify-tools.sourceforge.net/
+Source0:	http://github.com/rvoicilas/inotify-tools/archive/%{version}.tar.gz
+# Source0-md5:	065d1646f6af5c1ef5a993b8e240cfbc
+URL:		https://github.com/rvoicilas/inotify-tools/wiki
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	libtool >= 2:2
