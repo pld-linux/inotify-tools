@@ -10,6 +10,9 @@ Version:	3.20.1
 Release:	1
 License:	GPL v2
 Group:		Applications/System
+#Source0Download: https://github.com/rvoicilas/inotify-tools/releases
+# TODO: on upgrade change to:
+#Source0:	http://github.com/rvoicilas/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
 Source0:	http://github.com/rvoicilas/inotify-tools/archive/%{version}.tar.gz
 # Source0-md5:	065d1646f6af5c1ef5a993b8e240cfbc
 URL:		https://github.com/rvoicilas/inotify-tools/wiki
