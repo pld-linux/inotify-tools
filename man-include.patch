@@ -1,0 +1,76 @@
+From 3b5427c1f908fdd093778f6f0b439875bf9c7561 Mon Sep 17 00:00:00 2001
+From: kfollstad <kfollstad@gmail.com>
+Date: Wed, 3 Mar 2021 11:10:47 -0800
+Subject: [PATCH] Fix omission of --include/--includei options in man pages
+ (#133)
+
+And edit --exclude/--excludei for consistency.
+---
+ man/inotifywait.1.in  | 18 ++++++++++++++----
+ man/inotifywatch.1.in | 18 ++++++++++++++----
+ 2 files changed, 28 insertions(+), 8 deletions(-)
+
+diff --git a/man/inotifywait.1.in b/man/inotifywait.1.in
+index 2292a58..d1ec1d2 100644
+--- a/man/inotifywait.1.in
++++ b/man/inotifywait.1.in
+@@ -117,13 +117,23 @@ of fatal errors.
+ 
+ .TP
+ .B \-\-exclude <pattern>
+-Do not process any events whose filename matches the specified POSIX extended
+-regular expression, case sensitive.
++Do not process any events for the subset of files whose filenames match the
++specified POSIX regular expression, case sensitive.
+ 
+ .TP
+ .B \-\-excludei <pattern>
+-Do not process any events whose filename matches the specified POSIX extended
+-regular expression, case insensitive.
++Do not process any events for the subset of files whose filenames match the
++specified POSIX regular expression, case insensitive.
++
++.TP
++.B \-\-include <pattern>
++Process events only for the subset of files whose filenames match the specified
++POSIX regular expression, case sensitive.
++
++.TP
++.B \-\-includei <pattern>
++Process events only for the subset of files whose filenames match the specified
++POSIX regular expression, case insensitive.
+ 
+ .TP
+ .B \-t <seconds>, \-\-timeout <seconds>
+diff --git a/man/inotifywatch.1.in b/man/inotifywatch.1.in
+index 075330e..37116c8 100644
+--- a/man/inotifywatch.1.in
++++ b/man/inotifywatch.1.in
+@@ -72,13 +72,23 @@ of output!
+ 
+ .TP
+ .B \-\-exclude <pattern>
+-Do not process any events whose filename matches the specified POSIX extended
+-regular expression, case sensitive.
++Do not process any events for the subset of files whose filenames match the
++specified POSIX regular expression, case sensitive.
+ 
+ .TP
+ .B \-\-excludei <pattern>
+-Do not process any events whose filename matches the specified POSIX extended
+-regular expression, case insensitive.
++Do not process any events for the subset of files whose filenames match the
++specified POSIX regular expression, case insensitive.
++
++.TP
++.B \-\-include <pattern>
++Process events only for the subset of files whose filenames match the specified
++POSIX regular expression, case sensitive.
++
++.TP
++.B \-\-includei <pattern>
++Process events only for the subset of files whose filenames match the specified
++POSIX regular expression, case insensitive.
+ 
+ .TP
+ .B \-r, \-\-recursive
