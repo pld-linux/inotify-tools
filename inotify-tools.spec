@@ -13,7 +13,7 @@ Group:		Applications/System
 #Source0Download: https://github.com/rvoicilas/inotify-tools/releases
 # TODO: on upgrade change to:
 #Source0:	http://github.com/rvoicilas/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
-Source0:	http://github.com/rvoicilas/inotify-tools/archive/%{version}.tar.gz
+Source0:	https://github.com/rvoicilas/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	64f43d2206b837d5b43fb45088f4fd2f
 Patch0:		man-include.patch
 URL:		https://github.com/rvoicilas/inotify-tools/wiki
