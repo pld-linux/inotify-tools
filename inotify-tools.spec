@@ -1,24 +1,20 @@
 #
 # Conditional build:
-%bcond_with	doxygen		# build with doxygen support
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	inotify-tools provides a simple interface to inotify
 Summary(pl.UTF-8):	inotify-tools dostarcza interfejs do inotify
 Name:		inotify-tools
-Version:	3.20.11.0
-Release:	2
+Version:	3.21.9.6
+Release:	1
 License:	GPL v2
 Group:		Applications/System
-#Source0Download: https://github.com/rvoicilas/inotify-tools/releases
-# TODO: on upgrade change to:
-#Source0:	http://github.com/rvoicilas/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
-Source0:	https://github.com/rvoicilas/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	64f43d2206b837d5b43fb45088f4fd2f
-Patch0:		man-include.patch
-URL:		https://github.com/rvoicilas/inotify-tools/wiki
+Source0:	https://github.com/inotify-tools/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	3efaca769f3a720556d1eb8e85ee8277
+URL:		https://github.com/inotify-tools/inotify-tools/wiki
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
+BuildRequires:	doxygen
 BuildRequires:	libtool >= 2:2
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -75,7 +71,6 @@ Statyczna biblioteka inotify-tools.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -84,8 +79,9 @@ Statyczna biblioteka inotify-tools.
 %{__autoheader}
 %{__automake}
 %configure \
+	--enable-fanotify \
 	--enable-static%{!?with_static_libs:=no} \
-	%{?with_doxygen:--enable-doxygen}
+	--enable-doxygen
 %{__make}
 
 %install
@@ -106,8 +102,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README.md
+%attr(755,root,root) %{_bindir}/fsnotifywait
+%attr(755,root,root) %{_bindir}/fsnotifywatch
 %attr(755,root,root) %{_bindir}/inotifywait
 %attr(755,root,root) %{_bindir}/inotifywatch
+%{_mandir}/man1/fsnotifywait.1*
+%{_mandir}/man1/fsnotifywatch.1*
 %{_mandir}/man1/inotifywait.1*
 %{_mandir}/man1/inotifywatch.1*
 
