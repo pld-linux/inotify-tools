@@ -9,6 +9,7 @@ Version:	3.21.9.6
 Release:	1
 License:	GPL v2
 Group:		Applications/System
+#Source0Download: https://github.com/inotify-tools/inotify-tools/releases
 Source0:	https://github.com/inotify-tools/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	3efaca769f3a720556d1eb8e85ee8277
 URL:		https://github.com/inotify-tools/inotify-tools/wiki
@@ -16,6 +17,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	libtool >= 2:2
+BuildRequires:	rpm-build >= 4.6
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -69,6 +71,18 @@ Static inotify-tools library.
 %description static -l pl.UTF-8
 Statyczna biblioteka inotify-tools.
 
+%package apidocs
+Summary:	API documentation for inotify-tools library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki inotify-tools
+Group:		Documentation
+BuildArch:	noarch
+
+%description apidocs
+API documentation for inotify-tools library.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki inotify-tools.
+
 %prep
 %setup -q
 
@@ -118,7 +132,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc libinotifytools/src/doc/html/*
 %attr(755,root,root) %{_libdir}/libinotifytools.so
 %{_libdir}/libinotifytools.la
 %{_includedir}/inotifytools
@@ -128,3 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libinotifytools.a
 %endif
+
+%files apidocs
+%defattr(644,root,root,755)
+%doc libinotifytools/src/doc/html/*
