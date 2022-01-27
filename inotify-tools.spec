@@ -5,13 +5,13 @@
 Summary:	inotify-tools provides a simple interface to inotify
 Summary(pl.UTF-8):	inotify-tools dostarcza interfejs do inotify
 Name:		inotify-tools
-Version:	3.21.9.6
+Version:	3.22.1.0
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 #Source0Download: https://github.com/inotify-tools/inotify-tools/releases
 Source0:	https://github.com/inotify-tools/inotify-tools/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	3efaca769f3a720556d1eb8e85ee8277
+# Source0-md5:	998f126330cf333d6cc1e648988d7e04
 URL:		https://github.com/inotify-tools/inotify-tools/wiki
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
