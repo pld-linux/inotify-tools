@@ -94,9 +94,9 @@ Dokumentacja API biblioteki inotify-tools.
 %{__autoheader}
 %{__automake}
 %configure \
-	--enable-fanotify \
-	--enable-static%{!?with_static_libs:=no} \
-	--enable-doxygen
+	--enable-doxygen \
+	--enable-static%{!?with_static_libs:=no}
+
 %{__make}
 
 %install
